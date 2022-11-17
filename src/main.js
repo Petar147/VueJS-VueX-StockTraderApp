@@ -1,26 +1,29 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import VueResource from "vue-resource";
-import App from "./App.vue";
-import { routes } from "./routes";
-import {store} from './store/store';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import VueResource from 'vue-resource'
+
+import App from './App.vue'
+import {routes} from './routes'
+import store from './store/store';
+
 Vue.use(VueRouter);
 Vue.use(VueResource);
 
-Vue.filter('currency', (value) => {
-  return '$' + value.toLocaleString();
-});
+Vue.http.options.root = 'https://stock-trader-70aec-default-rtdb.firebaseio.com/'
 
-Vue.http.options.root = 'https://the-stock-trader-2841c-default-rtdb.firebaseio.com/';
+Vue.filter('currency', (value) => {
+  return '$' + value.toLocaleString()
+});
 
 const router = new VueRouter({
-  mode: "history",
+  mode: 'history',
   routes
-});
+})
 
 new Vue({
-  el: "#app",
+  el: '#app',
   router,
   store,
   render: h => h(App)
-});
+})
+
